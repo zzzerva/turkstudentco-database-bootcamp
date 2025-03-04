@@ -31,12 +31,9 @@ Bu sorgularla yalnızca istenen sütunları da çekebiliriz.
 
 ### **SQL Sorgusu:**
 ```sql
-SELECT DISTINCT (
-    SELECT d.departmentname 
-    FROM departments d 
-    WHERE d.departmentid = e.departmentid
-) AS departmentname
-FROM employees e;
+SELECT DISTINCT d.departmentname
+FROM employees e
+INNER JOIN departments d ON e.departmentid = d.departmentid;
 ```
 ### **Açıklama:**
 Bu sorguda, employees tablosunda bulunan çalışanların bağlı olduğu departman isimlerini benzersiz (distinct) olarak listeledim.
