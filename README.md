@@ -31,16 +31,17 @@ Bu sorgularla yalnızca istenen sütunları da çekebiliriz.
 
 ### **SQL Sorgusu:**
 ```sql
-SELECT DISTINCT d.departmentname
-FROM employees e
-INNER JOIN departments d ON e.departmentid = d.departmentid;
+SELECT DISTINCT (
+    SELECT d.departmentname 
+    FROM departments d 
+    WHERE d.departmentid = e.departmentid
+) AS departmentname
+FROM employees e;
 ```
 ### **Açıklama:**
-Bu sorguda, `employees` ve `departments` tablolarını **INNER JOIN** ile `departmentid` sütunu üzerinden birleştirdim.
+Bu sorguda, employees tablosunda bulunan çalışanların bağlı olduğu departman isimlerini benzersiz (distinct) olarak listeledim.
 
-**INNER JOIN** tercih etmemin sebebi, yalnızca eşleşen satırları getirmek istemem ve bu işlemin **JOIN** işlemine kıyasla daha düşük maliyetli olmasıdır.
-
-Daha sonra, çalışanların bağlı olduğu `departmentname` sütununu sorguya dahil ettim. **DISTINCT** ifadesi, tekrar eden departman isimlerini engelleyerek her departmanı yalnızca bir kez listelememi sağladı.
+Alt sorgu (SELECT d.departmentname ...), her bir çalışanın departmentid değerine karşılık gelen departman adını (departmentname) bulmak için kullanıldı. DISTINCT ifadesi ise tekrar eden departman isimlerini kaldırarak benzersiz departmanları listelememi sağladı.
 
 ---
 
