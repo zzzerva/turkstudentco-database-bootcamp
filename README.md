@@ -1,93 +1,58 @@
 # turkstudentco-database-bootcamp
-Database Bootcamp 1. Ödev: SQL sorguları ve açıklamaları.
 
-# Database Bootcamp – Ödev 1
+Bu repo, Database Bootcamp kapsamında gerçekleştirilen SQL ödevlerini içermektedir. Her ödev, verilen sorulara uygun olarak yazılmış SQL sorgularını ve açıklamalarını içermektedir.
 
-Bu ödevde, verilen SQL sorularına uygun sorgular yazıldı ve her birinin açıklaması detaylandırıldı.
-
----
-
-## **1. Soru: Çalışanların sadece FirstName, LastName ve Salary bilgilerini getiren bir SQL sorgusu yazınız.**
-
-### **SQL Sorgusu:**
-```sql
-SELECT firstname, lastname, salary
-FROM employees;
-```
-### **Açıklama:**
-Bu sorguda, `employees` tablosundan **firstname**, **lastname** ve **salary** sütunlarını çektim.
-
-**FROM** ifadesi, bu verilerin hangi tablodan çekileceğini belirtir. Ayrıca, ihtiyaca göre belirli sütunları ayrı ayrı sorgulayarak da veri çekebiliriz:
-```sql
-SELECT firstname FROM employees;
-SELECT lastname FROM employees;
-SELECT salary FROM employees;
-```
-Bu sorgularla yalnızca istenen sütunları da çekebiliriz.
+## İçindekiler
+- [Ödev 1](#ödev-1)
+- [Ödev 2](#ödev-2)
 
 ---
 
-## **2. Soru: Çalışanların çalıştıkları departmanları benzersiz olarak listeleyen bir SQL sorgusu yazınız.**
+## Ödev 1
+**Açıklama:**
+Bu ödevde, verilen SQL sorularına uygun sorgular yazılmış ve her birinin detaylı açıklaması yapılmıştır.
 
-### **SQL Sorgusu:**
-```sql
-SELECT DISTINCT d.departmentname
-FROM employees e
-INNER JOIN departments d ON e.departmentid = d.departmentid;
-```
-### **Açıklama:**
-Bu sorguda, employees tablosunda bulunan çalışanların bağlı olduğu departman isimlerini benzersiz (distinct) olarak listeledim.
+**Sorular:**
+1. **Çalışanların sadece FirstName, LastName ve Salary bilgilerini getirme**
+   - `employees` tablosundan bu sütunları getiren bir sorgu yazın.
 
-Alt sorgu (SELECT d.departmentname ...), her bir çalışanın departmentid değerine karşılık gelen departman adını (departmentname) bulmak için kullanıldı. DISTINCT ifadesi ise tekrar eden departman isimlerini kaldırarak benzersiz departmanları listelememi sağladı.
+2. **Çalışanların çalıştıkları departmanları benzersiz olarak listeleme**
+   - `employees` ve `departments` tablolarını JOIN ile birleştirin.
+   - `DISTINCT` kullanarak tekrar eden departman isimlerini engelleyin.
 
+3. **Sadece IT departmanında çalışanların bilgilerini getirme**
+   - `INNER JOIN` kullanarak `departments` tablosunu bağlayın.
+   - `WHERE` koşulu ile sadece IT departmanını filtreleyin.
+
+4. **Çalışanları maaşlarına göre büyükten küçüğe sıralama**
+   - `ORDER BY salary DESC` kullanarak sıralama yapın.
+
+5. **Çalışanların FirstName ve LastName alanlarını birleştirerek tam adlarını içeren yeni bir sütun oluşturma**
+   - `||` veya `CONCAT` fonksiyonunu kullanarak `full_name` sütununu oluşturun.
 ---
 
-## **3. Soru: Sadece IT departmanında çalışanların bilgilerini getiren bir SQL sorgusu yazınız.**
+## Ödev 2
+**Açıklama:**
+Bu ödevde, verilen SQL sorularına uygun olarak sorgular yazılmış ve her birinin detaylı açıklaması yapılmıştır.
 
-### **SQL Sorgusu:**
-```sql
-SELECT * FROM employees e
-INNER JOIN departments d ON e.departmentid = d.departmentid
-WHERE d.departmentname = 'IT';
-```
-### **Açıklama:**
-Bu sorguda, `employees` tablosundaki tüm sütunları seçtim ve **INNER JOIN** kullanarak `departments` tablosuyla `departmentid` sütunu üzerinden birleştirdim.
+**Sorular:**
+1. **Invoice tablosunda, tüm değerleri NULL olan kayıtların sayısını bulma**
+   - Tek bir SQL sorgusu ile bu kayıtların sayısını bulun.
+   - PostgreSQL’de satır sayısını yorum satırı olarak ekleyin.
 
-**WHERE** koşulunda yalnızca `departmentname` değeri **"IT"** olan satırların getirilmesini sağladım.
+2. **Total değerlerini iki katına çıkartarak eski ve yeni değerleri karşılaştırma**
+   - Mevcut `total` sütununu ikiyle çarpıp `new_total` olarak adlandırın.
+   - Sonuçları büyükten küçüğe sıralayın.
 
-Ayrıca, tablo adlarını **`employees e`** ve **`departments d`** olarak kısaltarak kullandım. Bu sayede, `departments.departmentname` yerine `d.departmentname` gibi daha sade bir yazım kullanarak sorguyu daha okunaklı hale getirdim.
-
+3. **Adres verisini belirli karakterlerle filtreleme ve 2013 Ağustos ayına göre listeleme**
+   - `billing_address` sütununun ilk 3 ve son 4 karakterini alarak birleştirin.
+   - 2013 yılının Ağustos ayında kesilen faturalar için filtreleme yapın.
 ---
 
-## **4. Soru: Çalışanları maaşlarına göre büyükten küçüğe sıralayan bir SQL sorgusu yazınız.**
+## Kullanım
+1. PostgreSQL veya uygun bir veritabanı yönetim sistemi kullanarak SQL dosyalarını çalıştırın.
+2. Her ödev için verilen açıklamalar doğrultusunda sorguları test edin ve çıktıları inceleyin.
 
-### **SQL Sorgusu:**
-```sql
-SELECT e.firstname, e.lastname, e.salary
-FROM employees e
-ORDER BY e.salary DESC;
-```
-### **Açıklama:**
-Bu sorguda, `employees` tablosundan **firstname**, **lastname** ve **salary** sütunlarını seçtim. **ORDER BY** ifadesi, sorgu sonucundaki verileri belirli bir sütuna göre sıralamak için kullanılır.
+**Lisans:** Bu repo eğitim amaçlı hazırlanmıştır.
 
-Bu örnekte, sıralamanın `salary` sütununa göre yapılması gerektiği için **ORDER BY salary** ifadesini kullandım. Maaşların büyükten küçüğe sıralanmasını sağlamak için **DESC** ifadesini ekledim.
 
----
-
-## **5. Soru: Çalışanların FirstName ve LastName alanlarını birleştirerek, tam adlarını içeren yeni bir sütun oluşturan bir SQL sorgusu yazınız.**
-
-### **SQL Sorgusu:**
-```sql
-SELECT CONCAT(e.firstname, ' ', e.lastname) AS full_name
-FROM employees e;
-```
-### **Açıklama:**
-Bu sorguda, çalışanların **firstname** ve **lastname** sütunlarını birleştirerek tam isimlerini içeren **full_name** adında yeni bir sütun oluşturdum. **CONCAT** fonksiyonu, MySQL gibi veritabanlarında metinleri birleştirmek için kullanılır.
-
-**PostgreSQL** gibi sistemlerde `|| ' ' ||` operatörü kullanılsa da, **Tuncay hocamız**, MySQL’de **CONCAT** fonksiyonunun kullanılması gerektiğini belirtti.
-
-Ayrıca, `' '` ifadesini ekleyerek ad ve soyad arasında bir boşluk olmasını sağladım. **AS full_name** ifadesiyle de oluşturduğum yeni sütuna anlamlı bir isim verdim.
-
----
-
-Bu ödevde, farklı SQL sorgularını kullanarak belirlenen kriterlere uygun veri çekme işlemleri gerçekleştirildi. **SQL'in temel sorgulama yapıları** olan **SELECT, JOIN, WHERE, DISTINCT ve ORDER BY** gibi ifadeler pratik edildi. 
