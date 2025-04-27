@@ -1,4 +1,4 @@
-# turkstudentco-database-bootcamp
+# TurkStudentCo-Database-Bootcamp
 
 Bu repo, **Database Bootcamp** kapsamında gerçekleştirilen SQL ödevlerini içermektedir.  
 Her ödev, verilen sorulara uygun olarak yazılmış **SQL sorgularını** ve **açıklamalarını** içermektedir.
